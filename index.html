@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <title>Score Keeper</title>
+    </head>
+
+    <body>
+        <header>
+            <span id="banner">Score Keeper</span>
+        </header>
+
+        <div class="container">
+            <h1>Score Keeper</h1>
+
+            <div class="select">
+                <label for="selectPlayingTo">Playing to:</label>
+                <select name="" id="selectPlayingTo" required>
+                    <option value="">--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th id="p1">Player 1</th>
+                        <th></th>
+                        <th id="p2">Player 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="scoreBoard" id="p1ScoreBoard">0</td>
+                        <td>-</td>
+                        <td class="scoreBoard" id="p2ScoreBoard">0</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <button class="ptBtns" id="p1Plus">+</button>
+                            <button class="ptBtns" id="p1Minus">-</button>
+                        </td>
+                        <td></td>
+                        <td>
+                            <button class="ptBtns" id="p2Plus">+</button>
+                            <button class="ptBtns" id="p2Minus">-</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%">
+                            <button id="reset">Reset</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <footer>
+            <div>
+                <h2>Player 1</h2>
+                <input
+                    type="text"
+                    placeholder="Enter Name"
+                    class="inputs"
+                    id="player1"
+                />
+            </div>
+            <div>
+                <h2>Player 2</h2>
+                <input
+                    type="text"
+                    placeholder="Enter Name"
+                    class="inputs"
+                    id="player2"
+                />
+            </div>
+        </footer>
+
+        <script src="app.js"></script>
+    </body>
+</html>

@@ -13,3 +13,6 @@ This is a score keeper for 2 players playing a game.
      - Winner is displayed green.
      - Loser is displayed red.
      - The moving banner displays the winner.
+
+## Demo
+![demo](score-keeper-demo.gif)

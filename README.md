@@ -16,3 +16,6 @@ This is a score keeper for 2 players playing a game.
 
 ## Demo
 ![demo](score-keeper-demo.gif)
+
+## Link
+Live-site URL: https://score-keeper-beta.vercel.app/

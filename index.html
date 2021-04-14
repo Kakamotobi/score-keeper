@@ -17,12 +17,12 @@
             <span id="banner">Score Keeper</span>
         </header>
 
-        <div class="container">
+        <main class="container">
             <h1>Score Keeper</h1>
 
             <div class="select">
                 <label for="selectPlayingTo">Playing to:</label>
-                <select name="" id="selectPlayingTo" required>
+                <select id="selectPlayingTo">
                     <option value="">--</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -34,44 +34,44 @@
                     <option value="8">8</option>
                     <option value="9">9</option>
                     <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">12</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
                 </select>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th id="p1">Player 1</th>
-                        <th></th>
-                        <th id="p2">Player 2</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="scoreBoard" id="p1ScoreBoard">0</td>
-                        <td>-</td>
-                        <td class="scoreBoard" id="p2ScoreBoard">0</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>
-                            <button class="ptBtns" id="p1Plus">+</button>
-                            <button class="ptBtns" id="p1Minus">-</button>
-                        </td>
-                        <td></td>
-                        <td>
-                            <button class="ptBtns" id="p2Plus">+</button>
-                            <button class="ptBtns" id="p2Minus">-</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="100%">
-                            <button id="reset">Reset</button>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+            <div class="grid-container">
+                <div id="p1">Player 1</div>
+                <div></div>
+                <div id="p2">Player 2</div>
+
+                <div class="scoreBoard" id="p1ScoreBoard">0</div>
+                <div>-</div>
+                <div class="scoreBoard" id="p2ScoreBoard">0</div>
+
+                <div class="ptBtns">
+                    <button class="ptBtn" id="p1Plus">+</button
+                    ><button class="ptBtn" id="p1Minus">-</button>
+                </div>
+                <div></div>
+                <div class="ptBtns">
+                    <button class="ptBtn" id="p2Plus">+</button
+                    ><button class="ptBtn" id="p2Minus">-</button>
+                </div>
+
+                <div>
+                    <button id="reset">Reset</button>
+                </div>
+            </div>
+        </main>
 
         <footer>
             <div>
@@ -81,6 +81,7 @@
                     placeholder="Enter Name"
                     class="inputs"
                     id="player1"
+                    maxlength="10"
                 />
             </div>
             <div>
@@ -90,6 +91,7 @@
                     placeholder="Enter Name"
                     class="inputs"
                     id="player2"
+                    maxlength="10"
                 />
             </div>
         </footer>

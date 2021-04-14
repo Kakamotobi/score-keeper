@@ -1,13 +1,9 @@
-/** Score Keeper **/
-
 html {
     box-sizing: border-box;
 }
-
 *,
 *:before,
 *:after {
-    /* border: 1px solid blue; */
     box-sizing: inherit;
     cursor: default;
 }
@@ -21,7 +17,6 @@ body {
 }
 
 /* -----Header----- */
-
 header {
     position: relative;
     width: 100%;
@@ -34,20 +29,21 @@ header {
     color: white;
     background-color: black;
 }
-
 header > span {
     position: absolute;
     white-space: nowrap;
     line-height: 100%;
-    animation: animate 15s linear infinite;
+    animation: animateMobile 8s linear infinite;
 }
-
-@keyframes animate {
+header:hover > span {
+    animation-play-state: paused;
+}
+@keyframes animateMobile {
     0% {
         transform: translateX(100%);
     }
     100% {
-        transform: translateX(-1000%);
+        transform: translateX(-300%);
     }
 }
 
@@ -57,7 +53,7 @@ header > span {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 350px;
+    width: 310px;
     height: 400px;
     margin: auto;
     padding: 35px 0;
@@ -82,48 +78,65 @@ select {
     border-radius: 5px;
 }
 select:hover {
+    border-color: black;
     cursor: pointer;
 }
+select::-webkit-scrollbar {
+    width: 10px;
+}
+select::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 4px;
+}
 
-table {
+.grid-container {
+    display: grid;
+    width: 270px;
+    height: 200px;
+    grid-template-columns: 48% 4% 48%;
+    grid-template-rows: repeat(4, 1fr);
+}
+.grid-container > * {
     text-align: center;
-    width: 250px;
+    height: 100%;
+    line-height: 50px;
 }
 #p1,
 #p2 {
     font-size: 1.5rem;
+    font-weight: bold;
+    overflow: hidden;
 }
 .scoreBoard {
     font-size: 1.8rem;
 }
-
 .ptBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.ptBtn {
     height: 30px;
     width: 30px;
     font-size: 1.2rem;
     padding: 0;
+    margin: 0 4px;
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
     transition: 150ms ease-in-out;
 }
-.ptBtns:hover {
+.ptBtn:hover {
     color: white;
     background-color: black;
     cursor: pointer;
 }
-
-/* tfoot > tr > td:first-child {
-    display: flex;
-    justify-content: space-evenly;
+.ptBtn:focus {
+    outline: none;
 }
-tfoot > tr > td:last-child {
-    display: flex;
-    justify-content: space-evenly;
-} */
-
-tfoot tr:last-child td {
-    height: 80px;
+.grid-container div:last-child {
+    grid-column: span 3;
 }
 #reset {
     background-color: white;
@@ -139,9 +152,7 @@ tfoot tr:last-child td {
     cursor: pointer;
 }
 
-/* ----- */
-
-/* Winner vs. Loser */
+/* -----Winner vs. Loser----- */
 .winner {
     color: green;
 }
@@ -164,17 +175,63 @@ footer div {
     align-items: center;
 }
 footer div h2 {
+    font-size: 1.1rem;
     margin: 0;
-    margin-left: 20px;
+    margin-left: 10px;
     display: inline-block;
 }
 .inputs {
     height: 20px;
+    width: 75px;
     margin: 0;
-    margin-left: 20px;
+    margin-left: 15px;
     border: none;
     border-bottom: 1px solid lightgrey;
 }
 .inputs:hover {
     cursor: text;
+    border-bottom-color: darkgrey;
+}
+
+/* -----Media Queries & Keyframes----- */
+
+@media screen and (min-width: 1024px) {
+    .container {
+        width: 350px;
+    }
+    footer div h2 {
+        font-size: 1.5rem;
+        margin-left: 15px;
+    }
+    .inputs {
+        width: 150px;
+        margin-left: 20px;
+    }
+    header > span {
+        animation: animateDesktopMedium 15s linear infinite;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    header > span {
+        animation: animateDesktopLarge 15s linear infinite;
+    }
+}
+
+@keyframes animateDesktopMedium {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-700%);
+    }
+}
+
+@keyframes animateDesktopLarge {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-1400%);
+    }
 }

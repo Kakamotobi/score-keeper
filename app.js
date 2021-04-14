@@ -1,167 +1,135 @@
-//// Score Keeper ////
+// ----------Player Objects---------- //
+// Player 1 //
+const p1 = {
+    score: 0,
+    plus: document.querySelector("#p1Plus"),
+    minus: document.querySelector("#p1Minus"),
+    displayName: document.querySelector("#p1DisplayName"),
+    scoreBoard: document.querySelector("#p1ScoreBoard"),
+    inputName: document.querySelector("#p1InputName"),
+};
 
+// Player 2 //
+const p2 = {
+    score: 0,
+    plus: document.querySelector("#p2Plus"),
+    minus: document.querySelector("#p2Minus"),
+    displayName: document.querySelector("#p2DisplayName"),
+    scoreBoard: document.querySelector("#p2ScoreBoard"),
+    inputName: document.querySelector("#p2InputName"),
+};
+
+// ----------Playing To---------- //
+// Compare playingTo value with p1.score and p2.score.
+let playingTo = 0;
+// Selecting number to play to.
+const selectPlayingTo = document.querySelector("#selectPlayingTo");
+selectPlayingTo.addEventListener("change", function () {
+    // Save selected value to play to playingTo value.
+    playingTo = parseInt(this.value);
+    // Reset
+    reset();
+});
+
+// ----------Other Setups---------- //
+// Create a boolean value to keep track of whether p1.score or p2.score has
+// reached playingTo, and prevent point increases.
+let isGameOver = false;
 // Select banner
 const banner = document.querySelector("#banner");
 
-// Select Players
-const p1 = document.querySelector("#p1");
-const p2 = document.querySelector("#p2");
-
-// Playing to
-// Need to compare playingTo value with p1Score and p2Score.
-let playingTo = 0;
-let p1Score = 0;
-let p2Score = 0;
-// Need to keep track of whether p1 or p2 has reached playingTo value (won the game)
-// and prevent further point increases.
-// So, create a boolean variable to compare.
-let isGameOver = false;
-
-// Selecting number to play to
-const selectPlayingTo = document.querySelector("#selectPlayingTo");
-
-// When playing to value is selected, reset game and save it in playingTo value.
-selectPlayingTo.addEventListener("change", function (evt) {
-    // Need to parseInt() because this.value is a string.
-    playingTo = parseInt(this.value);
-    // Reset
-    isGameOver = false;
-    p1Score = 0;
-    p1ScoreBoard.innerText = p1Score;
-    p2Score = 0;
-    p2ScoreBoard.innerText = p2Score;
-    p1.classList.remove("winner", "loser");
-    p1ScoreBoard.classList.remove("winner", "loser");
-    p2.classList.remove("winner", "loser");
-    p2ScoreBoard.classList.remove("winner", "loser");
-    banner.innerText = "Score Keeper";
+// ----------Plus Minus Buttons---------- //
+// Player 1 //
+p1.plus.addEventListener("click", function () {
+    plus(p1, p2);
+});
+p1.minus.addEventListener("click", function () {
+    minus(p1, p2);
 });
 
-// ---------- //
+// Player 2 //
+p2.plus.addEventListener("click", function () {
+    plus(p2, p1);
+});
+p2.minus.addEventListener("click", function () {
+    minus(p2, p1);
+});
 
-/// Player 1
-// Select P1 buttons
-const p1Plus = document.querySelector("#p1Plus");
-const p1Minus = document.querySelector("#p1Minus");
-// Select P1 scoreboard
-const p1ScoreBoard = document.querySelector("#p1ScoreBoard");
+// ----------Reset Button---------- //
+// Select reset button
+const resetBtn = document.querySelector("#resetBtn");
+resetBtn.addEventListener("click", function () {
+    selectPlayingTo.value = "";
+    reset();
+});
 
-// p1Plus button
-p1Plus.addEventListener("click", function () {
+// ----------Player Name Input---------- //
+p1.inputName.addEventListener("input", function () {
+    p1.displayName.innerText = p1.inputName.value;
+    if (p1.inputName.value === "") {
+        p1.displayName.innerText = "Player 1";
+    }
+});
+p2.inputName.addEventListener("input", function () {
+    p2.displayName.innerText = p2.inputName.value;
+    if (p2.inputName.value === "") {
+        p2.displayName.innerText = "Player 2";
+    }
+});
+
+// ----------Functions---------- //
+// Function for adding a point.
+function plus(player, opponent) {
     if (!isGameOver) {
         // If game is not over, add point.
-        p1Score++;
-        // If player reached playingTo value, game over.
-        if (p1Score === playingTo) {
+        player.score++;
+        // Then, if player reached playingTo value, game over.
+        if (player.score === playingTo) {
             // When clicked again, if(!isGameOver) doesn't run anymore for both players.
             isGameOver = true;
-            // When p1 wins, add the .winner class defined in style.css
-            p1.classList.add("winner");
-            p1ScoreBoard.classList.add("winner");
-            p2.classList.add("loser");
-            p2ScoreBoard.classList.add("loser");
-            // Change header banner to Player 1 Wins!
-            banner.innerText = `${p1.innerText} Wins!`;
+            // When player wins, add the .winner class to player.
+            player.displayName.classList.add("winner");
+            player.scoreBoard.classList.add("winner");
+            // Also add .loser class to opponent.
+            opponent.displayName.classList.add("loser");
+            opponent.scoreBoard.classList.add("loser");
+            // Change header banner to player Wins!
+            banner.innerText = `${player.displayName.innerText} Wins!`;
         }
-        p1ScoreBoard.innerText = p1Score;
+        // Display player's score on the score board.
+        player.scoreBoard.innerText = player.score;
     }
-});
-// p1Minus button
-p1Minus.addEventListener("click", function () {
-    // Only able to do this if p1Score or p2Score !== playingTo
-    if (p1Score && p2Score !== playingTo) {
-        // Even when p1 reached playingTo value, deduction is possible and the game is back on.
+}
+
+// Function for deducting a point.
+function minus(player, opponent) {
+    // Only if player.score OR opponent.score !== playingTo.
+    if (player.score && opponent.score !== playingTo) {
         isGameOver = false;
-        p1Score--;
-        p1ScoreBoard.innerText = p1Score;
-        p1.classList.remove("winner");
-        p1ScoreBoard.classList.remove("winner");
-        p2.classList.remove("loser");
-        p2ScoreBoard.classList.remove("loser");
+        // Allow deduction only for player if player wins, and the game is back on.
+        player.score--;
+        player.scoreBoard.innerText = player.score;
+        player.displayName.classList.remove("winner");
+        player.scoreBoard.classList.remove("winner");
+        opponent.displayName.classList.remove("loser");
+        opponent.scoreBoard.classList.remove("loser");
         banner.innerText = "Score Keeper";
-        if (p1Score === playingTo) {
+        if (player.score === playingTo) {
             isGameOver = true;
         }
     }
-});
-// ---------- //
+}
 
-/// Player 2
-// Select P2 buttons
-const p2Plus = document.querySelector("#p2Plus");
-const p2Minus = document.querySelector("#p2Minus");
-// Select P2 scoreboard
-const p2ScoreBoard = document.querySelector("#p2ScoreBoard");
-
-// p2Plus button
-p2Plus.addEventListener("click", function () {
-    if (!isGameOver) {
-        p2Score++;
-        if (p2Score === playingTo) {
-            isGameOver = true;
-            p2.classList.add("winner");
-            p2ScoreBoard.classList.add("winner");
-            p1.classList.add("loser");
-            p1ScoreBoard.classList.add("loser");
-            banner.innerText = `${p2.innerText} Wins!`;
-        }
-        p2ScoreBoard.innerText = p2Score;
-    }
-});
-// p2Minus button
-p2Minus.addEventListener("click", function () {
-    if (p2Score && p1Score !== playingTo) {
-        isGameOver = false;
-        p2Score--;
-        p2ScoreBoard.innerText = p2Score;
-        p2.classList.remove("winner");
-        p2ScoreBoard.classList.remove("winner");
-        p1.classList.remove("loser");
-        p1ScoreBoard.classList.remove("loser");
-        banner.innerText = "Score Keeper";
-        if (p2Score === playingTo) {
-            isGameOver = true;
-        }
-    }
-});
-
-// ---------- //
-
-/// Reset Scores
-// Select reset button
-const reset = document.querySelector("#reset");
-// Reset score to 0
-reset.addEventListener("click", function () {
+// Reset Function
+function reset() {
     isGameOver = false;
-    p1Score = 0;
-    p1ScoreBoard.innerText = p1Score;
-    p2Score = 0;
-    p2ScoreBoard.innerText = p2Score;
-    selectPlayingTo.value = "";
-    p1.classList.remove("winner", "loser");
-    p1ScoreBoard.classList.remove("winner", "loser");
-    p2.classList.remove("winner", "loser");
-    p2ScoreBoard.classList.remove("winner", "loser");
+    p1.score = 0;
+    p1.scoreBoard.innerText = p1.score;
+    p2.score = 0;
+    p2.scoreBoard.innerText = p2.score;
+    p1.displayName.classList.remove("winner", "loser");
+    p1.scoreBoard.classList.remove("winner", "loser");
+    p2.displayName.classList.remove("winner", "loser");
+    p2.scoreBoard.classList.remove("winner", "loser");
     banner.innerText = "Score Keeper";
-});
-
-// ---------- //
-
-/// Player Names
-// Select inputs
-const player1 = document.querySelector("#player1");
-const player2 = document.querySelector("#player2");
-
-player1.addEventListener("input", function () {
-    p1.innerText = player1.value;
-});
-player2.addEventListener("input", function () {
-    p2.innerText = player2.value;
-});
-
-// ---------- //
-
-// Make functions for:
-// 1) when player 1 wins
-// 2) when player 2 wins
-// 3) reset
+}

@@ -1,7 +1,7 @@
 # score-keeper
 
 ## Description
-This is a score keeper for 2 players playing a game.
+This is a score keeper for 2 players.
 
 ## Features
    - Players can enter their names to display on the score board.

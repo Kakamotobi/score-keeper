@@ -64,7 +64,6 @@ p2.minus.addEventListener("click", function () {
 // Select reset button
 const resetBtn = document.querySelector("#resetBtn");
 resetBtn.addEventListener("click", function () {
-    selectPlayingTo.value = "";
     reset();
 });
 

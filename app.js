@@ -31,6 +31,11 @@ selectPlayingTo.addEventListener("change", function () {
     reset();
 });
 
+// ----------Round Results---------- //
+// Select the results table
+const resultsTable = document.querySelector("#resultsTable");
+let round = 0;
+
 // ----------Other Setups---------- //
 // Create a boolean value to keep track of whether p1.score or p2.score has
 // reached playingTo, and prevent point increases.
@@ -95,6 +100,8 @@ function plus(player, opponent) {
             opponent.scoreBoard.classList.add("loser");
             // Change header banner to player Wins!
             banner.innerText = `${player.displayName.innerText} Wins!`;
+            // Record results
+            recordResults(player, opponent);
         }
         // Display player's score on the score board.
         player.scoreBoard.innerText = player.score;
@@ -114,9 +121,6 @@ function minus(player, opponent) {
         opponent.displayName.classList.remove("loser");
         opponent.scoreBoard.classList.remove("loser");
         banner.innerText = "Score Keeper";
-        if (player.score === playingTo) {
-            isGameOver = true;
-        }
     }
 }
 
@@ -132,4 +136,19 @@ function reset() {
     p2.displayName.classList.remove("winner", "loser");
     p2.scoreBoard.classList.remove("winner", "loser");
     banner.innerText = "Score Keeper";
+}
+
+// Function for recording results in table
+function recordResults(player, opponent) {
+    // Add result to roundResults
+    round++;
+    const rowTable = document.createElement("tr");
+    const roundNumTable = document.createElement("td");
+    const winnerTable = document.createElement("td");
+    const scoresTable = document.createElement("td");
+    resultsTable.append(rowTable);
+    rowTable.append(roundNumTable, winnerTable, scoresTable);
+    roundNumTable.append(round);
+    winnerTable.append(player.displayName.innerText);
+    scoresTable.append(`${player.score} - ${opponent.score}`);
 }

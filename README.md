@@ -24,3 +24,20 @@ This is a score keeper for 2 players.
 ## Link
 
 Live-site URL: https://score-keeper-beta.vercel.app/
+
+## My Process
+
+### Built With
+- HTML
+- CSS
+- JavaScript
+
+### What I Learned/Applied
+- First refactoring
+  - Used player objects to access each respective elements.
+  - Declared general functions that apply both ways (player, opponent).
+- Events
+  - Adding a class to an element upon a certain event and condition. 
+  - Ex: when a player wins/loses display green/red color.
+- Create elements in DOM
+  - Ex: recording results in table.

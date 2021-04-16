@@ -99,8 +99,8 @@ function plus(player, opponent) {
             opponent.scoreBoard.classList.add("loser");
             // Change header banner to player Wins!
             banner.innerText = `${player.displayName.innerText} Wins!`;
-            // Record results
-            recordResults(player, opponent);
+            // Record result
+            recordResult(player, opponent);
         }
         // Display player's score on the score board.
         player.scoreBoard.innerText = player.score;
@@ -138,9 +138,10 @@ function reset() {
 }
 
 // Function for recording results in table
-function recordResults(player, opponent) {
-    // Add result to roundResults
+function recordResult(player, opponent) {
+    // Update round number.
     round++;
+    // Add result to roundResults.
     const rowTable = document.createElement("tr");
     const roundNumTable = document.createElement("td");
     const winnerTable = document.createElement("td");
@@ -150,4 +151,15 @@ function recordResults(player, opponent) {
     roundNumTable.append(round);
     winnerTable.append(player.displayName.innerText);
     scoresTable.append(`${player.score} - ${opponent.score}`);
+    // Give rowTable an ID.
+    rowTable.id = "round" + round;
 }
+
+// Function for removing results in table
+// function removeResult() {
+//     const rowID = "round" + round;
+//     const targetRow = document.querySelector(`#${rowID}`);
+//     targetRow.remove();
+//     // Keep round in sync
+//     round--;
+// }
